@@ -16,7 +16,7 @@ public class PostsController {
 
     @GetMapping
     public String newPost() {
-        return "page1";
+        return "sendPost";
     }
 
     @PostMapping
@@ -30,12 +30,12 @@ public class PostsController {
     public String getPost(@PathVariable String url, Model model) {
 
         model.addAttribute("post", postsService.getPost(url));
-        return "page2";
+        return "getPost";
     }
 
     @GetMapping("/post")
     public String getAllPosts(Authentication authentication, Model model) {
         model.addAttribute("post", postsService.getAllPosts(authentication.getName()));
-        return "posts";
+        return "getPosts";
     }
 }
