@@ -32,4 +32,10 @@ public class PostsController {
         model.addAttribute("post", postsService.getPost(url));
         return "page2";
     }
+
+    @GetMapping("/post")
+    public String getAllPosts(Authentication authentication, Model model) {
+        model.addAttribute("post", postsService.getAllPosts(authentication.getName()));
+        return "posts";
+    }
 }

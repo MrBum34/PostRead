@@ -6,6 +6,7 @@ import by.vstu.postread.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -40,5 +41,10 @@ public class PostsService {
             return "Неверная ссылка";
         }
         return post.getText();
+    }
+
+    public List<Posts> getAllPosts(String username) {
+        List<Posts> posts = postsRepository.findAllByUserUsername(username);
+        return posts;
     }
 }
