@@ -2,6 +2,7 @@ package by.vstu.postread.service;
 
 import by.vstu.postread.entity.Posts;
 import by.vstu.postread.repository.PostsRepository;
+import by.vstu.postread.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +12,10 @@ import java.util.Random;
 public class PostsService {
     @Autowired
     private PostsRepository postsRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    public String savePost(Posts posts) {
+    public String savePost(Posts posts, String username) {
         String LOWER_CASE_LETTERS = "abcdefghijklmnopqrstuvwxyz";
         String UPPER_CASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String ALL_LETTERS = LOWER_CASE_LETTERS + UPPER_CASE_LETTERS;
@@ -26,6 +29,7 @@ public class PostsService {
             sb.append(c);
         }
         posts.setUrl(sb.toString());
+        posts.setUser(userRepository.findByUsername(username));
         posts = postsRepository.save(posts);
         return posts.getUrl();
     }

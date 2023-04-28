@@ -20,5 +20,7 @@ public class Posts {
     private Long id;
     private String text;
     private String url;
-    private LocalDateTime localDateTime;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
